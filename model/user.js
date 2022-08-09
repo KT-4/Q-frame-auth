@@ -1,13 +1,15 @@
 const mongoose = require('mongoose')
+const rolesData = require('../config/roles')
+
 
 const userSchema = new mongoose.Schema({
     first_name:{
         type:String,
-        default:null
+        required:true
     },
     last_name:{
         type:String,
-        default:null
+        required:true
     },
     email:{
         type:String,
@@ -15,6 +17,11 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type:String
+    },
+    role:{
+        type:String,
+        enum:[rolesData.roles.admin,rolesData.roles.user],
+        default:rolesData .roles.user
     },
     token:{
         type:String
