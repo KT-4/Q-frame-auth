@@ -22,7 +22,7 @@ const logController = async (req,res)=>{
             });
             user.token = token;
 
-            res.status(200).json(user)
+             res.status(200).json(user)
 
         }
         res.status(400).send('Invalid Credentials...')

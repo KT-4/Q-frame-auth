@@ -5,7 +5,7 @@ const mongoose  = require('mongoose');
 
 const userRegister = async (req,res)=>{
     try{
-        const {first_name,last_name,email,password} = req.body;   
+        const {first_name,last_name,phone,email,password} = req.body;   
  
  
         if(!(first_name && last_name && email && password)){
@@ -24,6 +24,7 @@ const userRegister = async (req,res)=>{
        const user = await User.create({
          first_name,
          last_name,
+         phone,
          email:email.toLowerCase(),
          password:encryptedPassword
        })
@@ -31,7 +32,7 @@ const userRegister = async (req,res)=>{
  
        const token = jwt.sign({
          user_id:user._id, email },process.env.TOKEN_KEY,{
-             expiresIn:"2h",
+             expiresIn:"24h",
          })
          user.token = token
          res.status(201).json(user)

@@ -5,11 +5,18 @@ const logAuth = require('../controller/logauth.controller')
 const userControll = require('../controller/user.Controller')
 const admincontroll = require('../controller/admin')
 
+//router restpassword 
+const restPassword = require('../controller/passwordReset')
+
+
 const auth = require('../middleware/auth')
 
 router.post('/register',authController.userRegister)
 router.post('/login',logAuth.logController)
 
+
+router.post('/reset-password',restPassword.Userget)
+router.post('./rest-passworduser',restPassword.resrtPass)
 
 //User controller routes
 
@@ -18,7 +25,7 @@ router.post('/login',logAuth.logController)
 
 //admin controller.js
 
-     router.get('/admin',admincontroll.verify)
+ router.get('/admin',admincontroll.verify)
 
 //midleware auth.js
 
