@@ -9,9 +9,7 @@ const userSchema = new mongoose.Schema({
     last_name:{
         type:String
     },
-    phone:{
-        type:Number
-    },
+
     email:{
         type:String,
         trim:true
@@ -32,5 +30,14 @@ const userSchema = new mongoose.Schema({
         type:String
     }
 })
+ 
+//  userSchema.methods.toJSON = () =>{
+//     let obj = this.toObject();
+//     delete obj.password;
+//     delete obj._v;
+//     return obj;
+//  }
 
-module.exports = mongoose.model('user',userSchema)
+
+const User = new mongoose.model('User',userSchema)
+module.exports =  User;

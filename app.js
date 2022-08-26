@@ -1,24 +1,32 @@
-require('dotenv').config();
-require('./config/db').connect();
-const cors = require('cors')
 
-const express = require('express')
+require('dotenv').config()
+require('./config/db')
+
+const express = require('express');
 const app = express();
-const { API_PORT } = process.env;
+const cors = require('cors')
+const logger = require('morgan')
+const router = require('./routes/index.route')
+// const auth = require('./middleware/auth')
+// const admin = require('./middleware/admin')
 
-const router = require('./routes/routes')
 
+const port = process.env.PORT || 3000;
 
-app.use(express.json())
+//******* middleware ***** //
 app.use(cors());
-
+app.use(logger("dev"))
+app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-// routes
-app.use('/',router)
+//******* routes ******* //
+ app.use('/',router)
 
+// **** call welcome user **** //
+//  app.post('/welcome',auth,(req,res)=>{
+//     res.send("Welcome User 👏")
+//  });
 
-const port = process.env.port || API_PORT
 
 app.listen(port,()=>{
     console.log(`Server running on port ${port}`)
